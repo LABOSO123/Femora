@@ -12,6 +12,7 @@ param(
     [string]$Repo = "Femora"
 )
 
+# Valid topics - all start with lowercase, max 50 chars, hyphens allowed
 $topics = @(
     "women-health",
     "menstrual-cycle",
@@ -33,6 +34,19 @@ $topics = @(
     "kenya",
     "healthcare"
 )
+
+# Validate topics meet GitHub requirements
+foreach ($topic in $topics) {
+    if ($topic -notmatch '^[a-z0-9]') {
+        Write-Warning "Topic '$topic' doesn't start with lowercase letter or number"
+    }
+    if ($topic.Length -gt 50) {
+        Write-Warning "Topic '$topic' exceeds 50 characters"
+    }
+    if ($topic -notmatch '^[a-z0-9][a-z0-9-]*$') {
+        Write-Warning "Topic '$topic' contains invalid characters"
+    }
+}
 
 $headers = @{
     "Accept" = "application/vnd.github.mercy-preview+json"
