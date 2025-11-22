@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Femora - AI-powered menstrual cycle tracking app. Track your cycle, symptoms, diet, and health for every stage of her life.">
+    <title>Femora 🚺 - For every stage of her life</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landingPage" class="landing-page">
+        <div class="landing-content">
+            <div class="logo-container">
+                <div class="flower-petal petal-1"></div>
+                <div class="flower-petal petal-2"></div>
+                <div class="flower-petal petal-3"></div>
+                <div class="flower-petal petal-4"></div>
+                <div class="flower-petal petal-5"></div>
+                <div class="flower-petal petal-6"></div>
+                <div class="flower-center">
+                    <img src="Femora logo.png" alt="Femora Logo" class="landing-logo">
+                </div>
+            </div>
+            <div class="woman-figure">
+                <div class="woman-body"></div>
+                <div class="woman-head"></div>
+            </div>
+            <h1 class="landing-title">Femora</h1>
+            <p class="landing-tagline">For every stage of her life</p>
+            <button class="landing-cta" onclick="enterApp()">Enter App</button>
+            <div class="floating-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="mainNavbar" style="display: none;">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="Femora logo.png" alt="Femora Logo" class="logo-img">
+                <span class="logo-text">Femora</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#dashboard" class="nav-link active">Dashboard</a></li>
+                <li><a href="#tracking" class="nav-link">Tracking</a></li>
+                <li><a href="#diet" class="nav-link">Diet Plan</a></li>
+                <li><a href="#contraceptive" class="nav-link">Contraceptive</a></li>
+                <li><a href="#menopause" class="nav-link">Menopause</a></li>
+                <li><a href="#health-record" class="nav-link">Health Record</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="premium-badge" id="premiumBtn">Premium</button>
+                <button class="mobile-menu-toggle">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main App Container -->
+    <main class="app-container">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="app-section">
+            <div class="dashboard-hero">
+                <div class="dashboard-hero-content">
+                    <h1 class="dashboard-hero-title">Welcome Back</h1>
+                    <p class="dashboard-hero-subtitle">Your personalized cycle tracking companion</p>
+                </div>
+                <div class="dashboard-hero-decoration">
+                    <div class="decoration-circle circle-1"></div>
+                    <div class="decoration-circle circle-2"></div>
+                    <div class="decoration-circle circle-3"></div>
+                </div>
+            </div>
+
+            <!-- Cycle Overview Card -->
+            <div class="cycle-overview-card">
+                <div class="cycle-phase">
+                    <div class="phase-indicator" id="phaseIndicator">
+                        <div class="phase-circle"></div>
+                    </div>
+                    <div class="phase-info">
+                        <h2 id="currentPhase">Menstrual Phase</h2>
+                        <p id="cycleDay">Day 3 of 28</p>
+                        <p id="nextPeriod">Next period in 25 days</p>
+                    </div>
+                </div>
+                <div class="cycle-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Cycle Length</span>
+                        <span class="stat-value" id="cycleLength">28 days</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Period Length</span>
+                        <span class="stat-value" id="periodLength">5 days</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Ovulation</span>
+                        <span class="stat-value" id="ovulationDay">Day 14</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Insights Card -->
+            <div class="insight-card">
+                <div class="insight-header">
+                    <span class="ai-icon">🤖</span>
+                    <h3>AI Insights</h3>
+                </div>
+                <div class="insight-content" id="aiInsight">
+                    <p>Your symptoms suggest your estrogen may be low today. Consider iron-rich foods like sukuma wiki, spinach, or beans to support your body during this phase.</p>
+                </div>
+                <div class="insight-actions">
+                    <button class="btn-secondary" onclick="generateInsight()">Get New Insight</button>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="action-grid">
+                    <button class="action-card" onclick="showSection('tracking')">
+                        <span class="action-icon">📝</span>
+                        <span>Log Symptoms</span>
+                    </button>
+                    <button class="action-card" onclick="showSection('diet')">
+                        <span class="action-icon">🥗</span>
+                        <span>View Diet Plan</span>
+                    </button>
+                    <button class="action-card" onclick="showSection('contraceptive')">
+                        <span class="action-icon">💊</span>
+                        <span>Contraceptive</span>
+                    </button>
+                    <button class="action-card" onclick="showSection('health-record')">
+                        <span class="action-icon">📊</span>
+                        <span>Health Record</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Today's Symptoms Summary -->
+            <div class="symptoms-summary">
+                <h3>Today's Summary</h3>
+                <div class="symptom-tags" id="todaySymptoms">
+                    <span class="symptom-tag">No symptoms logged today</span>
+                </div>
+                <button class="btn-primary" onclick="showSection('tracking')">Add Symptoms</button>
+            </div>
+        </section>
+
+        <!-- Symptom Tracking Section -->
+        <section id="tracking" class="app-section">
+            <div class="section-header">
+                <h2>📝 Symptom Tracking</h2>
+                <p>Track your period, symptoms, and overall health</p>
+            </div>
+
+            <!-- Calendar Component -->
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button class="calendar-nav-btn" id="prevMonth">‹</button>
+                    <h3 id="calendarMonthYear"></h3>
+                    <button class="calendar-nav-btn" id="nextMonth">›</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <span class="legend-color period"></span>
+                        <span>Period</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color ovulation"></span>
+                        <span>Ovulation</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color fertile"></span>
+                        <span>Fertile Window</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color safe"></span>
+                        <span>Safe Days</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color activity"></span>
+                        <span>Sexual Activity</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color symptoms"></span>
+                        <span>Symptoms</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color pill"></span>
+                        <span>Pill/Contraceptive</span>
+                    </div>
+                </div>
+                <div class="calendar-predictions" id="calendarPredictions"></div>
+            </div>
+
+            <!-- Quick Log Buttons -->
+            <div class="quick-log-section">
+                <h3>Quick Log</h3>
+                <div class="quick-log-buttons">
+                    <button class="quick-log-btn" data-type="period" onclick="openQuickLog('period')">
+                        <span class="quick-log-icon">🩸</span>
+                        <span>Log Period</span>
+                    </button>
+                    <button class="quick-log-btn" data-type="activity" onclick="openQuickLog('activity')">
+                        <span class="quick-log-icon">💑</span>
+                        <span>Sexual Activity</span>
+                    </button>
+                    <button class="quick-log-btn" data-type="symptoms" onclick="openQuickLog('symptoms')">
+                        <span class="quick-log-icon">😣</span>
+                        <span>Symptoms</span>
+                    </button>
+                    <button class="quick-log-btn" data-type="pill" onclick="openQuickLog('pill')">
+                        <span class="quick-log-icon">💊</span>
+                        <span>Pill/Contraceptive</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="tracking-form">
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="trackingDate" class="form-input" value="">
+                </div>
+
+                <!-- Period Tracking -->
+                <div class="tracking-card">
+                    <h3>🩸 Period & Flow</h3>
+                    <div class="form-group">
+                        <label>Period Status</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="periodStatus" value="none">
+                                <span>No Period</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="periodStatus" value="light">
+                                <span>Light</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="periodStatus" value="medium">
+                                <span>Medium</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="periodStatus" value="heavy">
+                                <span>Heavy</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pain Tracking -->
+                <div class="tracking-card">
+                    <h3>😣 Pain Level</h3>
+                    <div class="form-group">
+                        <label>Pain Intensity (0-10)</label>
+                        <input type="range" id="painLevel" min="0" max="10" value="0" class="slider">
+                        <div class="slider-labels">
+                            <span>None</span>
+                            <span id="painValue">0</span>
+                            <span>Severe</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Pain Type</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="cramps">
+                                <span>Cramps</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="backache">
+                                <span>Backache</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="headache">
+                                <span>Headache</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="breast-tenderness">
+                                <span>Breast Tenderness</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mood Tracking -->
+                <div class="tracking-card">
+                    <h3>😊 Mood</h3>
+                    <div class="mood-selector">
+                        <button class="mood-btn" data-mood="happy">😊 Happy</button>
+                        <button class="mood-btn" data-mood="sad">😢 Sad</button>
+                        <button class="mood-btn" data-mood="anxious">😰 Anxious</button>
+                        <button class="mood-btn" data-mood="irritable">😠 Irritable</button>
+                        <button class="mood-btn" data-mood="calm">😌 Calm</button>
+                        <button class="mood-btn" data-mood="energetic">⚡ Energetic</button>
+                    </div>
+                </div>
+
+                <!-- Energy & Sleep -->
+                <div class="tracking-card">
+                    <h3>⚡ Energy & Sleep</h3>
+                    <div class="form-group">
+                        <label>Energy Level</label>
+                        <input type="range" id="energyLevel" min="0" max="10" value="5" class="slider">
+                        <div class="slider-labels">
+                            <span>Low</span>
+                            <span id="energyValue">5</span>
+                            <span>High</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Hours of Sleep</label>
+                        <input type="number" id="sleepHours" min="0" max="24" value="8" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Sleep Quality</label>
+                        <select id="sleepQuality" class="form-input">
+                            <option value="excellent">Excellent</option>
+                            <option value="good">Good</option>
+                            <option value="fair">Fair</option>
+                            <option value="poor">Poor</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Cravings -->
+                <div class="tracking-card">
+                    <h3>🍫 Cravings</h3>
+                    <div class="form-group">
+                        <input type="text" id="cravings" placeholder="e.g., chocolate, salty foods, sweets" class="form-input">
+                    </div>
+                </div>
+
+                <!-- Additional Symptoms -->
+                <div class="tracking-card">
+                    <h3>➕ Other Symptoms</h3>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="bloating">
+                            <span>Bloating</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="nausea">
+                            <span>Nausea</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="acne">
+                            <span>Acne</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="constipation">
+                            <span>Constipation</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="diarrhea">
+                            <span>Diarrhea</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="hot-flashes">
+                            <span>Hot Flashes</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="btn-primary btn-large" onclick="saveSymptoms()">Save Symptoms</button>
+            </div>
+        </section>
+
+        <!-- AI-Driven Diet Plan Section -->
+        <section id="diet" class="app-section">
+            <div class="section-header">
+                <h2>🥗 AI-Driven Diet Plan</h2>
+                <p>Personalized nutrition based on your cycle phase and symptoms</p>
+            </div>
+
+            <div class="diet-phase-selector">
+                <button class="phase-btn active" data-phase="menstrual">Menstrual</button>
+                <button class="phase-btn" data-phase="follicular">Follicular</button>
+                <button class="phase-btn" data-phase="ovulatory">Ovulatory</button>
+                <button class="phase-btn" data-phase="luteal">Luteal</button>
+            </div>
+
+            <div class="diet-plan-card">
+                <div class="diet-phase-info">
+                    <h3 id="dietPhaseName">Menstrual Phase</h3>
+                    <p id="dietPhaseDesc">Focus on iron-rich foods to replenish what you've lost during your period.</p>
+                </div>
+
+                <div class="diet-recommendations">
+                    <div class="recommendation-section">
+                        <h4>🍽️ Recommended Foods</h4>
+                        <div class="food-list" id="recommendedFoods">
+                            <div class="food-item">
+                                <span class="food-icon">🥬</span>
+                                <div class="food-info">
+                                    <strong>Sukuma Wiki</strong>
+                                    <p>Rich in iron and folate - perfect for this phase</p>
+                                </div>
+                            </div>
+                            <div class="food-item">
+                                <span class="food-icon">🌾</span>
+                                <div class="food-info">
+                                    <strong>Ugali with Omena</strong>
+                                    <p>Complete protein and iron source</p>
+                                </div>
+                            </div>
+                            <div class="food-item">
+                                <span class="food-icon">🫘</span>
+                                <div class="food-info">
+                                    <strong>Njahi (Black Beans)</strong>
+                                    <p>High in iron and fiber</p>
+                                </div>
+                            </div>
+                            <div class="food-item">
+                                <span class="food-icon">🥩</span>
+                                <div class="food-info">
+                                    <strong>Lean Meat</strong>
+                                    <p>Heme iron for better absorption</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recommendation-section">
+                        <h4>💧 Hydration</h4>
+                        <div class="hydration-tracker">
+                            <p>Target: <strong>8-10 glasses</strong> of water today</p>
+                            <div class="water-cups">
+                                <button class="water-cup" onclick="logWater()">💧</button>
+                                <span id="waterCount">0</span> / 8 glasses
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recommendation-section">
+                        <h4>🛒 Shopping List</h4>
+                        <div class="shopping-list" id="shoppingList">
+                            <label class="shopping-item">
+                                <input type="checkbox">
+                                <span>Sukuma Wiki</span>
+                            </label>
+                            <label class="shopping-item">
+                                <input type="checkbox">
+                                <span>Omena (Dried Fish)</span>
+                            </label>
+                            <label class="shopping-item">
+                                <input type="checkbox">
+                                <span>Njahi (Black Beans)</span>
+                            </label>
+                            <label class="shopping-item">
+                                <input type="checkbox">
+                                <span>Arrowroot</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diet-actions">
+                    <button class="btn-secondary" onclick="generateDietPlan()">🔄 Regenerate Plan</button>
+                    <button class="btn-primary" onclick="saveDietPlan()">💾 Save Plan</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sexual Activity & Contraceptive Tracker -->
+        <section id="contraceptive" class="app-section">
+            <div class="section-header">
+                <h2>💊 Sexual Activity & Contraceptive Tracker</h2>
+                <p>Track sexual activity, contraceptives, and fertility windows</p>
+            </div>
+
+            <div class="contraceptive-tabs">
+                <button class="tab-btn active" onclick="showContraceptiveTab('activity')">Sexual Activity</button>
+                <button class="tab-btn" onclick="showContraceptiveTab('contraceptive')">Contraceptive</button>
+                <button class="tab-btn" onclick="showContraceptiveTab('fertility')">Fertility Window</button>
+            </div>
+
+            <!-- Sexual Activity Tab -->
+            <div id="activityTab" class="tab-content active">
+                <div class="tracking-card">
+                    <h3>📅 Log Sexual Activity</h3>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="activityDate" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select id="activityType" class="form-input">
+                            <option value="protected">Protected</option>
+                            <option value="unprotected">Unprotected</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Contraceptive Used</label>
+                        <select id="activityContraceptive" class="form-input">
+                            <option value="condom">Condom</option>
+                            <option value="pill">Birth Control Pill</option>
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" onclick="logActivity()">Log Activity</button>
+                </div>
+
+                <div class="risk-assessment" id="riskAssessment">
+                    <h3>⚠️ Pregnancy Risk Assessment</h3>
+                    <div class="risk-level" id="riskLevel">
+                        <p>Log activity to see risk assessment</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contraceptive Tab -->
+            <div id="contraceptiveTab" class="tab-content">
+                <div class="tracking-card">
+                    <h3>💊 Contraceptive Management</h3>
+                    <div class="form-group">
+                        <label>Contraceptive Type</label>
+                        <select id="contraceptiveType" class="form-input">
+                            <option value="pill">Birth Control Pill</option>
+                            <option value="injection">Injection (Depo-Provera)</option>
+                            <option value="implant">Implant (Implanon/Nexplanon)</option>
+                            <option value="iud">IUD</option>
+                            <option value="condom">Condom</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Start Date</label>
+                        <input type="date" id="contraceptiveStartDate" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Next Dose/Appointment</label>
+                        <input type="date" id="contraceptiveNextDate" class="form-input">
+                    </div>
+                    <button class="btn-primary" onclick="saveContraceptive()">Save Contraceptive</button>
+                </div>
+
+                <div class="reminder-card">
+                    <h3>⏰ Reminders</h3>
+                    <div class="reminder-list" id="reminderList">
+                        <div class="reminder-item">
+                            <span class="reminder-icon">💊</span>
+                            <div class="reminder-info">
+                                <strong>Pill Reminder</strong>
+                                <p>Take your pill at 8:00 AM daily</p>
+                            </div>
+                            <button class="btn-small">Set</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="side-effects-card">
+                    <h3>📊 Side Effects Monitor</h3>
+                    <p class="info-text">Track changes that might indicate contraceptive side effects</p>
+                    <div class="form-group">
+                        <label>Weight Change (kg)</label>
+                        <input type="number" id="weightChange" step="0.1" class="form-input" placeholder="0.0">
+                    </div>
+                    <div class="form-group">
+                        <label>Mood Changes</label>
+                        <select id="moodChange" class="form-input">
+                            <option value="none">No Change</option>
+                            <option value="depression">Depression</option>
+                            <option value="anxiety">Anxiety</option>
+                            <option value="irritability">Irritability</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Other Symptoms</label>
+                        <textarea id="otherSideEffects" class="form-input" rows="3" placeholder="e.g., migraines, weight gain, mood dips"></textarea>
+                    </div>
+                    <button class="btn-secondary" onclick="logSideEffects()">Log Side Effects</button>
+                </div>
+            </div>
+
+            <!-- Fertility Window Tab -->
+            <div id="fertilityTab" class="tab-content">
+                <div class="fertility-calendar">
+                    <h3>📅 Fertility Window</h3>
+                    <div class="fertility-info">
+                        <div class="fertility-period">
+                            <strong>Estimated Ovulation:</strong>
+                            <span id="ovulationDate">Day 14 (March 15, 2024)</span>
+                        </div>
+                        <div class="fertility-period">
+                            <strong>Fertile Window:</strong>
+                            <span id="fertileWindow">Days 12-16</span>
+                        </div>
+                        <div class="fertility-period">
+                            <strong>Safe Days:</strong>
+                            <span id="safeDays">Days 1-11, 17-28</span>
+                        </div>
+                    </div>
+                    <div class="calendar-visual" id="fertilityCalendar">
+                        <!-- Calendar will be generated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menopause & Perimenopause Section -->
+        <section id="menopause" class="app-section">
+            <div class="section-header">
+                <h2>🌡️ Menopause & Perimenopause Companion</h2>
+                <p>Track symptoms and get personalized support during this transition</p>
+            </div>
+
+            <div class="menopause-status">
+                <div class="status-card">
+                    <h3>Your Status</h3>
+                    <select id="menopauseStatus" class="form-input">
+                        <option value="pre-menopause">Pre-Menopause</option>
+                        <option value="perimenopause">Perimenopause</option>
+                        <option value="menopause">Menopause</option>
+                        <option value="post-menopause">Post-Menopause</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="menopause-tracking">
+                <div class="tracking-card">
+                    <h3>🔥 Hot Flashes</h3>
+                    <div class="form-group">
+                        <label>Frequency Today</label>
+                        <input type="number" id="hotFlashCount" min="0" value="0" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Intensity (0-10)</label>
+                        <input type="range" id="hotFlashIntensity" min="0" max="10" value="0" class="slider">
+                        <div class="slider-labels">
+                            <span>Mild</span>
+                            <span id="hotFlashValue">0</span>
+                            <span>Severe</span>
+                        </div>
+                    </div>
+                    <button class="btn-primary" onclick="logHotFlash()">Log Hot Flash</button>
+                </div>
+
+                <div class="tracking-card">
+                    <h3>😴 Sleep & Mood</h3>
+                    <div class="form-group">
+                        <label>Sleep Quality</label>
+                        <select id="menopauseSleep" class="form-input">
+                            <option value="excellent">Excellent</option>
+                            <option value="good">Good</option>
+                            <option value="fair">Fair</option>
+                            <option value="poor">Poor</option>
+                            <option value="insomnia">Insomnia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mood</label>
+                        <select id="menopauseMood" class="form-input">
+                            <option value="stable">Stable</option>
+                            <option value="irritable">Irritable</option>
+                            <option value="anxious">Anxious</option>
+                            <option value="depressed">Depressed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="tracking-card">
+                    <h3>💪 Physical Symptoms</h3>
+                    <div class="form-group">
+                        <label>Weight Change (kg)</label>
+                        <input type="number" id="menopauseWeight" step="0.1" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Libido</label>
+                        <select id="menopauseLibido" class="form-input">
+                            <option value="normal">Normal</option>
+                            <option value="decreased">Decreased</option>
+                            <option value="increased">Increased</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Vaginal Dryness</label>
+                        <select id="vaginalDryness" class="form-input">
+                            <option value="none">None</option>
+                            <option value="mild">Mild</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="severe">Severe</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Joint Pain</label>
+                        <input type="range" id="jointPain" min="0" max="10" value="0" class="slider">
+                        <div class="slider-labels">
+                            <span>None</span>
+                            <span id="jointPainValue">0</span>
+                            <span>Severe</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Fatigue Level</label>
+                        <input type="range" id="fatigueLevel" min="0" max="10" value="0" class="slider">
+                        <div class="slider-labels">
+                            <span>None</span>
+                            <span id="fatigueValue">0</span>
+                            <span>Severe</span>
+                        </div>
+                    </div>
+                    <button class="btn-primary" onclick="saveMenopauseData()">Save Data</button>
+                </div>
+            </div>
+
+            <div class="menopause-insights">
+                <div class="insight-card">
+                    <h3>🤖 AI Menopause Insights</h3>
+                    <div class="insight-content" id="menopauseInsight">
+                        <p>Based on your symptoms, consider increasing phytoestrogen-rich foods like soy, flaxseeds, and legumes to help balance hormones naturally.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lifetime Health Record Section -->
+        <section id="health-record" class="app-section">
+            <div class="section-header">
+                <h2>📊 Lifetime Health Record</h2>
+                <p>Your complete reproductive health history from adolescence to menopause</p>
+            </div>
+
+            <div class="health-record-tabs">
+                <button class="tab-btn active" onclick="showHealthTab('overview')">Overview</button>
+                <button class="tab-btn" onclick="showHealthTab('periods')">Period History</button>
+                <button class="tab-btn" onclick="showHealthTab('pregnancy')">Pregnancy</button>
+                <button class="tab-btn" onclick="showHealthTab('hormones')">Hormonal Signals</button>
+            </div>
+
+            <div id="overviewTab" class="tab-content active">
+                <div class="health-stats-grid">
+                    <div class="stat-card">
+                        <h4>Total Cycles Tracked</h4>
+                        <p class="stat-number" id="totalCycles">12</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Average Cycle Length</h4>
+                        <p class="stat-number" id="avgCycleLength">28 days</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Health Score</h4>
+                        <p class="stat-number" id="healthScore">85/100</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Years of Data</h4>
+                        <p class="stat-number" id="yearsOfData">2 years</p>
+                    </div>
+                </div>
+
+                <div class="health-timeline">
+                    <h3>Health Timeline</h3>
+                    <div class="timeline" id="healthTimeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2022</div>
+                            <div class="timeline-content">
+                                <h4>Started Tracking</h4>
+                                <p>Began logging periods and symptoms</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2023</div>
+                            <div class="timeline-content">
+                                <h4>Regular Cycles</h4>
+                                <p>Established 28-day cycle pattern</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="periodsTab" class="tab-content">
+                <div class="period-history">
+                    <h3>Period History</h3>
+                    <div class="period-chart" id="periodChart">
+                        <!-- Period chart will be generated by JS -->
+                    </div>
+                    <div class="period-list" id="periodList">
+                        <!-- Period history list -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="pregnancyTab" class="tab-content">
+                <div class="pregnancy-tracking">
+                    <h3>Pregnancy History</h3>
+                    <button class="btn-primary" onclick="addPregnancy()">+ Add Pregnancy Record</button>
+                    <div class="pregnancy-list" id="pregnancyList">
+                        <!-- Pregnancy records -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="hormonesTab" class="tab-content">
+                <div class="hormone-signals">
+                    <h3>Hormonal Pattern Analysis</h3>
+                    <div class="hormone-chart" id="hormoneChart">
+                        <!-- Hormone chart -->
+                    </div>
+                    <div class="hormone-insights">
+                        <h4>AI Detected Patterns</h4>
+                        <ul id="hormonePatterns">
+                            <li>Regular ovulation detected</li>
+                            <li>Estrogen levels stable</li>
+                            <li>No signs of PCOS or endometriosis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Premium Modal -->
+    <div id="premiumModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closePremiumModal()">&times;</span>
+            <h2>🌟 Upgrade to Premium</h2>
+            <div class="premium-features">
+                <div class="premium-feature">
+                    <span class="feature-icon">🤖</span>
+                    <div>
+                        <h4>Advanced AI Predictions</h4>
+                        <p>Get personalized cycle predictions and hormonal insights</p>
+                    </div>
+                </div>
+                <div class="premium-feature">
+                    <span class="feature-icon">🥗</span>
+                    <div>
+                        <h4>Custom Diet Programs</h4>
+                        <p>Personalized meal plans based on your cycle and preferences</p>
+                    </div>
+                </div>
+                <div class="premium-feature">
+                    <span class="feature-icon">💪</span>
+                    <div>
+                        <h4>Exercise Plans</h4>
+                        <p>Cycle-synced workout routines</p>
+                    </div>
+                </div>
+                <div class="premium-feature">
+                    <span class="feature-icon">🧠</span>
+                    <div>
+                        <h4>Mental Wellness Coach</h4>
+                        <p>Mood tracking and mental health support</p>
+                    </div>
+                </div>
+                <div class="premium-feature">
+                    <span class="feature-icon">🎤</span>
+                    <div>
+                        <h4>Voice Notes</h4>
+                        <p>Log symptoms using voice commands</p>
+                    </div>
+                </div>
+                <div class="premium-feature">
+                    <span class="feature-icon">👩‍⚕️</span>
+                    <div>
+                        <h4>Telehealth Access</h4>
+                        <p>Connect with healthcare experts</p>
+                    </div>
+                </div>
+            </div>
+            <div class="pricing-options">
+                <div class="pricing-card">
+                    <h3>Monthly</h3>
+                    <p class="price">KES 500<span>/month</span></p>
+                    <button class="btn-primary">Subscribe</button>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Annual</h3>
+                    <p class="price">KES 4,500<span>/year</span></p>
+                    <p class="savings">Save 25%</p>
+                    <button class="btn-primary">Subscribe</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Lifetime</h3>
+                    <p class="price">KES 15,000</p>
+                    <p class="savings">Best Value</p>
+                    <button class="btn-primary">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Log Modal -->
+    <div id="quickLogModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeQuickLogModal()">&times;</span>
+            <h2 id="quickLogTitle">Log Event</h2>
+            <div id="quickLogForm"></div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/cycle-tracker.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/diet-planner.js"></script>
+    <script src="js/contraceptive-tracker.js"></script>
+    <script src="js/menopause-tracker.js"></script>
+    <script src="js/health-record.js"></script>
+</body>
+</html>

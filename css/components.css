@@ -1,0 +1,1421 @@
+/* Component Styles for Femora App */
+
+/* App Container */
+.app-container {
+    margin-top: 70px;
+    min-height: calc(100vh - 70px);
+    background: var(--bg-light);
+}
+
+.app-section {
+    display: none;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.app-section.active {
+    display: block;
+}
+
+/* Dashboard Hero Section */
+.dashboard-hero {
+    position: relative;
+    background: linear-gradient(135deg, rgba(109, 52, 123, 0.05), rgba(147, 71, 140, 0.05));
+    border-radius: 25px;
+    padding: 3rem 2rem;
+    margin-bottom: 3rem;
+    overflow: hidden;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.dashboard-hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.dashboard-hero-subtitle {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    font-weight: 400;
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.dashboard-hero-decoration {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.decoration-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(109, 52, 123, 0.1), rgba(147, 71, 140, 0.1));
+    animation: floatDecoration 8s ease-in-out infinite;
+}
+
+.circle-1 {
+    width: 150px;
+    height: 150px;
+    top: -50px;
+    left: -50px;
+    animation-delay: 0s;
+}
+
+.circle-2 {
+    width: 100px;
+    height: 100px;
+    bottom: -30px;
+    right: 10%;
+    animation-delay: 2s;
+}
+
+.circle-3 {
+    width: 80px;
+    height: 80px;
+    top: 50%;
+    right: -20px;
+    animation-delay: 4s;
+}
+
+@keyframes floatDecoration {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translate(20px, -20px) scale(1.1);
+        opacity: 0.5;
+    }
+}
+
+/* Cycle Overview Card */
+.cycle-overview-card {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.cycle-overview-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.cycle-phase {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.phase-indicator {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.phase-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    border: 4px solid white;
+}
+
+.phase-info h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.phase-info p {
+    opacity: 0.9;
+    margin: 0.3rem 0;
+}
+
+.cycle-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    opacity: 0.8;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Insight Card */
+.insight-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.insight-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.ai-icon {
+    font-size: 1.5rem;
+}
+
+.insight-content {
+    background: var(--bg-light);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+/* Quick Actions */
+.quick-actions {
+    margin-bottom: 2rem;
+}
+
+.quick-actions h3 {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.action-card {
+    background: white;
+    border: 2px solid var(--bg-light);
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+    background: linear-gradient(135deg, rgba(109, 52, 123, 0.08), rgba(147, 71, 140, 0.08));
+}
+
+.action-icon {
+    font-size: 2rem;
+}
+
+/* Symptoms Summary */
+.symptoms-summary {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.symptoms-summary h3 {
+    margin-bottom: 1rem;
+}
+
+.symptom-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.symptom-tag {
+    background: var(--bg-light);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+/* Section Header */
+.section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.section-header p {
+    color: var(--text-light);
+}
+
+/* Tracking Form */
+.tracking-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.tracking-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.tracking-card h3 {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--bg-light);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Radio and Checkbox Groups */
+.radio-group, .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.radio-label, .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    background: var(--bg-light);
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.radio-label:hover, .checkbox-label:hover {
+    background: #e2e8f0;
+}
+
+.radio-label input[type="radio"],
+.checkbox-label input[type="checkbox"] {
+    cursor: pointer;
+}
+
+/* Slider */
+.slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: var(--bg-light);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    border: none;
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* Mood Selector */
+.mood-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.mood-btn {
+    padding: 1rem;
+    border: 2px solid var(--bg-light);
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.mood-btn:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.mood-btn.active {
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    box-shadow: 0 2px 8px rgba(109, 52, 123, 0.3);
+}
+
+/* Buttons */
+.btn-primary, .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.btn-secondary {
+    background: var(--bg-light);
+    color: var(--text-dark);
+}
+
+.btn-secondary:hover {
+    background: #e2e8f0;
+}
+
+.btn-large {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+}
+
+.btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* Diet Plan Styles */
+.diet-phase-selector {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.phase-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--bg-light);
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.phase-btn:hover {
+    border-color: var(--primary-color);
+}
+
+.phase-btn.active {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
+}
+
+.diet-plan-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.diet-phase-info {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--bg-light);
+}
+
+.diet-phase-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.recommendation-section {
+    margin-bottom: 2rem;
+}
+
+.recommendation-section h4 {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.food-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.food-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-light);
+    border-radius: 10px;
+}
+
+.food-icon {
+    font-size: 2rem;
+}
+
+.food-info strong {
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.food-info p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.hydration-tracker {
+    background: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.water-cups {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.water-cup {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.water-cup:hover {
+    transform: scale(1.2);
+}
+
+.shopping-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.shopping-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: var(--bg-light);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.diet-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Contraceptive Styles */
+.contraceptive-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--bg-light);
+}
+
+.tab-btn {
+    padding: 1rem 1.5rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-light);
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: var(--primary-color);
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    font-weight: 600;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.risk-assessment {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.risk-level {
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.risk-level.low {
+    background: #d4edda;
+    color: #155724;
+}
+
+.risk-level.medium {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.risk-level.high {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.reminder-card, .side-effects-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.reminder-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.reminder-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-light);
+    border-radius: 10px;
+}
+
+.reminder-icon {
+    font-size: 1.5rem;
+}
+
+.reminder-info {
+    flex: 1;
+}
+
+.fertility-calendar {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.fertility-info {
+    margin-bottom: 2rem;
+}
+
+.fertility-period {
+    padding: 1rem;
+    background: var(--bg-light);
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+}
+
+/* Menopause Styles */
+.menopause-status {
+    margin-bottom: 2rem;
+}
+
+.status-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.menopause-tracking {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.menopause-insights {
+    margin-top: 2rem;
+}
+
+/* Health Record Styles */
+.health-record-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--bg-light);
+    flex-wrap: wrap;
+}
+
+.health-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.stat-card h4 {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.health-timeline {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.timeline {
+    margin-top: 2rem;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+    border-left: 3px solid var(--primary-color);
+}
+
+.timeline-date {
+    font-weight: 700;
+    color: var(--primary-color);
+    min-width: 60px;
+}
+
+.timeline-content h4 {
+    margin-bottom: 0.3rem;
+}
+
+.timeline-content p {
+    color: var(--text-light);
+}
+
+/* Premium Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 20px;
+    max-width: 900px;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-light);
+}
+
+.premium-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.premium-feature {
+    display: flex;
+    gap: 1rem;
+    align-items: start;
+}
+
+.feature-icon {
+    font-size: 2rem;
+}
+
+.pricing-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.pricing-card {
+    background: var(--bg-light);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.pricing-card:hover {
+    border-color: var(--primary-color);
+}
+
+.pricing-card.featured {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    transform: scale(1.05);
+}
+
+.pricing-card h3 {
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.price span {
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.savings {
+    color: #10b981;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.pricing-card.featured .savings {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Premium Badge */
+.premium-badge {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(109, 52, 123, 0.3);
+}
+
+.premium-badge:hover {
+    transform: scale(1.05);
+}
+
+/* Calendar Styles */
+.calendar-container {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.calendar-header h3 {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.calendar-nav-btn {
+    background: var(--bg-light);
+    border: 2px solid var(--accent-light);
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-nav-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.calendar-day-header {
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary-color);
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.calendar-day {
+    position: relative;
+    min-height: 80px;
+    padding: 0.5rem;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.85rem;
+    border: 2px solid var(--bg-light);
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.calendar-day:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(109, 52, 123, 0.2);
+}
+
+.calendar-day.other-month {
+    opacity: 0.4;
+    background: var(--bg-light);
+}
+
+.calendar-day.today {
+    border-color: var(--primary-color);
+    border-width: 3px;
+    font-weight: 700;
+}
+
+.calendar-day.selected {
+    border-color: var(--secondary-color);
+    border-width: 3px;
+    background: linear-gradient(135deg, rgba(109, 52, 123, 0.1), rgba(147, 71, 140, 0.1));
+    box-shadow: 0 4px 12px rgba(109, 52, 123, 0.3);
+}
+
+.calendar-day.period {
+    background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+    border-color: var(--secondary-color);
+    color: var(--accent-dark);
+}
+
+.calendar-day.ovulation {
+    background: linear-gradient(135deg, #e1bee7, #ce93d8);
+    border-color: var(--primary-color);
+    color: var(--accent-dark);
+}
+
+.calendar-day.fertile {
+    background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+    border-color: var(--accent-color);
+    color: var(--accent-dark);
+}
+
+.calendar-day.safe {
+    background: var(--bg-light);
+    color: var(--text-light);
+}
+
+.calendar-day.has-activity {
+    position: relative;
+}
+
+.calendar-day.has-activity::after {
+    content: '💑';
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 0.7rem;
+}
+
+.calendar-day.has-symptoms {
+    position: relative;
+}
+
+.calendar-day.has-symptoms::after {
+    content: '😣';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 0.7rem;
+}
+
+.calendar-day.has-pill {
+    position: relative;
+}
+
+.calendar-day.has-pill::after {
+    content: '💊';
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    font-size: 0.7rem;
+}
+
+.day-number {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+}
+
+.day-events {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    margin-top: auto;
+    justify-content: center;
+}
+
+.event-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.event-dot.period {
+    background: var(--secondary-color);
+}
+
+.event-dot.activity {
+    background: #ff6b6b;
+}
+
+.event-dot.symptoms {
+    background: #ffa726;
+}
+
+.event-dot.pill {
+    background: #42a5f5;
+}
+
+.calendar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem;
+    background: var(--bg-light);
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.legend-color.period {
+    background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+    border: 2px solid var(--secondary-color);
+}
+
+.legend-color.ovulation {
+    background: linear-gradient(135deg, #e1bee7, #ce93d8);
+    border: 2px solid var(--primary-color);
+}
+
+.legend-color.fertile {
+    background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+    border: 2px solid var(--accent-color);
+}
+
+.legend-color.safe {
+    background: var(--bg-light);
+    border: 2px solid var(--accent-light);
+}
+
+.legend-color.activity {
+    background: #ff6b6b;
+    border: 2px solid #ff5252;
+}
+
+.legend-color.symptoms {
+    background: #ffa726;
+    border: 2px solid #ff9800;
+}
+
+.legend-color.pill {
+    background: #42a5f5;
+    border: 2px solid #2196f3;
+}
+
+.calendar-predictions {
+    background: linear-gradient(135deg, rgba(109, 52, 123, 0.1), rgba(147, 71, 140, 0.1));
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+.calendar-predictions h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.prediction-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prediction-label {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.prediction-value {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.quick-log-section {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.quick-log-section h3 {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.quick-log-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.quick-log-btn {
+    background: white;
+    border: 2px solid var(--accent-light);
+    border-radius: 12px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.quick-log-btn:hover {
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(109, 52, 123, 0.05), rgba(147, 71, 140, 0.05));
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.quick-log-icon {
+    font-size: 2rem;
+}
+
+/* Period History Styles */
+.period-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.period-history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--bg-light);
+    border-radius: 10px;
+}
+
+.period-date {
+    font-weight: 600;
+}
+
+.period-flow {
+    color: var(--text-light);
+}
+
+/* Pregnancy List Styles */
+.pregnancy-list-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.pregnancy-item {
+    padding: 1.5rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.pregnancy-number {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.pregnancy-date,
+.pregnancy-outcome {
+    color: var(--text-light);
+    margin: 0.25rem 0;
+}
+
+/* Info Text */
+.info-text {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .app-section {
+        padding: 1rem;
+    }
+    
+    .cycle-phase {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cycle-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .mood-selector {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .diet-phase-selector {
+        flex-direction: column;
+    }
+    
+    .pricing-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .pricing-card.featured {
+        transform: none;
+    }
+    
+    .calendar-grid {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.25rem;
+    }
+    
+    .calendar-day {
+        min-height: 60px;
+        padding: 0.25rem;
+        font-size: 0.75rem;
+    }
+    
+    .day-number {
+        font-size: 0.85rem;
+    }
+    
+    .calendar-legend {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .quick-log-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .calendar-predictions {
+        padding: 1rem;
+    }
+    
+    .prediction-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .logo-img {
+        height: 35px;
+    }
+    
+    .logo-text {
+        font-size: 1.5rem;
+    }
+}
+

@@ -1,0 +1,27 @@
+{
+  "name": "femora",
+  "version": "1.0.0",
+  "description": "Femora - AI-powered menstrual cycle tracking app. For every stage of her life.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8000",
+    "dev": "npx http-server -p 8000"
+  },
+  "keywords": [
+    "femora",
+    "menstrual-cycle",
+    "period-tracker",
+    "women-health",
+    "cycle-tracking",
+    "fertility",
+    "contraceptive",
+    "menopause",
+    "health-app",
+    "kenya"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {}
+}
+
