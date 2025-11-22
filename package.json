@@ -4,8 +4,9 @@
   "description": "Femora - AI-powered menstrual cycle tracking app. For every stage of her life.",
   "main": "index.html",
   "scripts": {
-    "start": "npx http-server -p 8000",
-    "dev": "npx http-server -p 8000"
+    "start": "npx http-server -p 8000 -o",
+    "dev": "npx http-server -p 8000 -o",
+    "serve": "npx http-server -p 8000"
   },
   "keywords": [
     "femora",
@@ -17,10 +18,22 @@
     "contraceptive",
     "menopause",
     "health-app",
-    "kenya"
+    "kenya",
+    "reproductive-health",
+    "pwa",
+    "calendar",
+    "symptom-tracker"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "LABOSO123",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LABOSO123/Femora.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LABOSO123/Femora/issues"
+  },
+  "homepage": "https://github.com/LABOSO123/Femora#readme",
   "dependencies": {},
   "devDependencies": {}
 }
