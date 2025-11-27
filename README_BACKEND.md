@@ -69,7 +69,7 @@ Health check endpoint.
 **IMPORTANT:** Create a `.env` file in the `Femora` directory with your API key:
 
 ```env
-AI_API_KEY=AIzaSyDyu1Iv-1uUmMm-B0iWk3Cu9bdS4vYDFg4
+AI_API_KEY=your_actual_api_key_here
 PORT=3001
 ```
 
