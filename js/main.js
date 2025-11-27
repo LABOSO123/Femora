@@ -11,22 +11,37 @@ function initializeApp() {
     setupSliders();
     setupMoodButtons();
     
-    // Check if landing page should be shown
-    const hasSeenLanding = sessionStorage.getItem('femora_landing_seen');
-    if (!hasSeenLanding) {
+    // ALWAYS show landing page on initial load - ignore sessionStorage
+    // Only hide it if user explicitly clicks "Enter App"
+    const landingPage = document.getElementById('landingPage');
+    const navbar = document.getElementById('mainNavbar');
+    const dashboard = document.getElementById('dashboard');
+    
+    // Check if user has already entered the app in this session
+    const hasEnteredApp = sessionStorage.getItem('femora_landing_seen');
+    
+    if (!hasEnteredApp) {
         // Show landing page, hide navbar and dashboard
-        document.getElementById('mainNavbar').style.display = 'none';
-        document.getElementById('dashboard').classList.remove('active');
+        if (landingPage) {
+            landingPage.classList.remove('hidden');
+            landingPage.style.opacity = '1';
+            landingPage.style.display = 'flex';
+        }
+        if (navbar) navbar.style.display = 'none';
+        if (dashboard) dashboard.classList.remove('active');
     } else {
-        // Hide landing page, show navbar and dashboard
-        const landingPage = document.getElementById('landingPage');
+        // User has already entered - show app, hide splash
         if (landingPage) {
             landingPage.classList.add('hidden');
         }
-        document.getElementById('mainNavbar').style.display = 'flex';
-        document.getElementById('dashboard').classList.add('active');
-        generateInsight();
-        cycleTracker.updateTodaySymptoms();
+        if (navbar) navbar.style.display = 'flex';
+        if (dashboard) {
+            dashboard.classList.add('active');
+            generateInsight();
+            cycleTracker.updateTodaySymptoms();
+        }
+        // Ensure navigation is set up
+        setTimeout(setupNavigation, 100);
     }
 }
 
@@ -48,32 +63,103 @@ function enterApp() {
     
     // Show navbar and dashboard
     setTimeout(() => {
-        if (navbar) navbar.style.display = 'flex';
+        if (navbar) {
+            navbar.style.display = 'flex';
+        }
         if (dashboard) {
             dashboard.classList.add('active');
             generateInsight();
             cycleTracker.updateTodaySymptoms();
         }
+        // Ensure navigation is set up after navbar is visible
+        setTimeout(setupNavigation, 100);
     }, 500);
 }
 
 // Navigation between sections
 function setupNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const sectionId = link.getAttribute('href').substring(1);
-            showSection(sectionId);
+    
+    if (navLinks.length === 0) {
+        console.warn('No navigation links found, retrying...');
+        // Try again after a short delay in case navbar isn't loaded yet
+        setTimeout(setupNavigation, 200);
+        return;
+    }
+    
+    console.log(`Setting up navigation for ${navLinks.length} links`);
+    
+    // Use event delegation on the nav-links container for better reliability
+    const navLinksContainer = document.querySelector('.nav-links');
+    if (navLinksContainer) {
+        // Remove any existing listener
+        navLinksContainer.removeEventListener('click', handleNavClick);
+        // Add new listener
+        navLinksContainer.addEventListener('click', handleNavClick);
+    }
+    
+    // Also set up individual link listeners as backup
+    navLinks.forEach((link) => {
+        // Remove existing listeners by cloning
+        if (link.dataset.navSetup !== 'true') {
+            link.dataset.navSetup = 'true';
             
-            // Update active nav link
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-        });
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const href = this.getAttribute('href');
+                if (!href || !href.startsWith('#')) {
+                    console.warn('Nav link has invalid href:', href);
+                    return;
+                }
+                
+                const sectionId = href.substring(1);
+                console.log('Navigation clicked:', sectionId);
+                
+                showSection(sectionId);
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        }
     });
+    
+    console.log(`✅ Navigation setup complete: ${navLinks.length} links configured`);
+}
+
+// Event delegation handler for navigation
+function handleNavClick(e) {
+    const link = e.target.closest('.nav-link');
+    if (!link) return;
+    
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const href = link.getAttribute('href');
+    if (!href || !href.startsWith('#')) {
+        return;
+    }
+    
+    const sectionId = href.substring(1);
+    console.log('Navigation clicked (delegation):', sectionId);
+    
+    showSection(sectionId);
+    
+    // Update active nav link
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
 }
 
 function showSection(sectionId) {
+    if (!sectionId) {
+        console.error('showSection called without sectionId');
+        return;
+    }
+    
+    console.log('Showing section:', sectionId);
+    
     // Hide all sections
     document.querySelectorAll('.app-section').forEach(section => {
         section.classList.remove('active');
@@ -83,6 +169,9 @@ function showSection(sectionId) {
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
         targetSection.classList.add('active');
+        console.log('Section activated:', sectionId);
+    } else {
+        console.error('Section not found:', sectionId);
     }
     
     // Initialize calendar if tracking section is shown
@@ -91,11 +180,14 @@ function showSection(sectionId) {
         window.calendar.updatePredictions();
     }
     
-    // Close mobile menu if open
+    // Close mobile menu if open (use class-based approach)
     const navLinks = document.querySelector('.nav-links');
-    if (navLinks && window.innerWidth <= 768) {
-        navLinks.style.display = 'none';
+    if (navLinks) {
+        navLinks.classList.remove('active');
     }
+    
+    // Scroll to top of page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Mobile menu toggle
@@ -105,16 +197,21 @@ function setupMobileMenu() {
     
     if (mobileMenuToggle && navLinks) {
         mobileMenuToggle.addEventListener('click', () => {
-            const isVisible = navLinks.style.display === 'flex';
-            navLinks.style.display = isVisible ? 'none' : 'flex';
-            navLinks.style.flexDirection = 'column';
-            navLinks.style.position = 'absolute';
-            navLinks.style.top = '100%';
-            navLinks.style.left = '0';
-            navLinks.style.right = '0';
-            navLinks.style.background = 'white';
-            navLinks.style.padding = '1rem';
-            navLinks.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+        
+        // Close menu when clicking a nav link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
         });
     }
 }
@@ -200,9 +297,12 @@ function saveSymptoms() {
 }
 
 // Generate AI Insight
-function generateInsight() {
+async function generateInsight() {
     const insightEl = document.getElementById('aiInsight');
     if (!insightEl) return;
+    
+    // Show loading state
+    insightEl.innerHTML = '<p>🤖 Generating personalized insight...</p>';
     
     const phase = cycleTracker.getCurrentPhase();
     const cycleDay = cycleTracker.calculateCycleDay();
@@ -210,9 +310,49 @@ function generateInsight() {
         s => s.date === new Date().toISOString().split('T')[0]
     );
     
+    try {
+        // Call backend API
+        const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:3001'
+            : ''; // Use relative URL in production
+        
+        const response = await fetch(`${API_URL}/api/ai/insight`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                phase: phase.name,
+                cycleDay: cycleDay,
+                symptoms: todaySymptoms?.symptoms || null,
+                cycleData: cycleTracker.cycleData
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error('API request failed');
+        }
+        
+        const data = await response.json();
+        
+        if (data.success && data.insight) {
+            insightEl.innerHTML = `<p>${data.insight}</p>`;
+        } else {
+            // Use fallback insight
+            insightEl.innerHTML = `<p>${data.insight || getFallbackInsight(phase, todaySymptoms)}</p>`;
+        }
+    } catch (error) {
+        console.error('Error generating AI insight:', error);
+        // Fallback to local insight generation
+        const fallbackInsight = getFallbackInsight(phase, todaySymptoms);
+        insightEl.innerHTML = `<p>${fallbackInsight}</p>`;
+    }
+}
+
+// Fallback insight generator (when API is unavailable)
+function getFallbackInsight(phase, todaySymptoms) {
     let insight = '';
     
-    // Generate insight based on phase and symptoms
     if (phase.name === 'Menstrual') {
         if (todaySymptoms?.symptoms?.painLevel > 5) {
             insight = 'Your symptoms suggest higher pain levels during your period. Consider iron-rich foods like sukuma wiki, spinach, or beans. Heat therapy and gentle movement may help.';
@@ -231,7 +371,6 @@ function generateInsight() {
         }
     }
     
-    // Add hormonal insights if symptoms suggest issues
     if (todaySymptoms?.symptoms) {
         const symptoms = todaySymptoms.symptoms;
         if (symptoms.energyLevel < 3 && phase.name !== 'Menstrual') {
@@ -243,7 +382,7 @@ function generateInsight() {
         insight = 'Continue tracking your symptoms. The more data you log, the better insights we can provide about your cycle and health.';
     }
     
-    insightEl.innerHTML = `<p>${insight}</p>`;
+    return insight;
 }
 
 // Premium Modal
@@ -274,6 +413,25 @@ const premiumBtn = document.getElementById('premiumBtn');
 if (premiumBtn) {
     premiumBtn.addEventListener('click', openPremiumModal);
 }
+
+// Global click handler for navigation (fallback)
+document.addEventListener('click', (e) => {
+    // Check if clicked element is a nav link
+    const navLink = e.target.closest('.nav-link');
+    if (navLink && navLink.hasAttribute('href')) {
+        const href = navLink.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const sectionId = href.substring(1);
+            console.log('Navigation clicked (global handler):', sectionId);
+            showSection(sectionId);
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            navLink.classList.add('active');
+        }
+    }
+});
 
 // Export functions for global access
 window.showSection = showSection;
